@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 2021_08_26_172620) do
   enable_extension "plpgsql"
 
   create_table "suppliers", force: :cascade do |t|
-    t.string "Название поставщика"
+    t.integer "Код_поставщика"
+    t.string "Название_поставщика"
   end
 
 end
