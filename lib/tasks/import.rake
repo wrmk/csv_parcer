@@ -13,7 +13,7 @@ namespace :import do
                 "Название_поставщика" => name_supplier
                 )
       end
-      p supplier
+      #p supplier
     end
   end
 end

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_172620) do
+ActiveRecord::Schema.define(version: 2021_08_30_172643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "skus", primary_key: "SKU", force: :cascade do |t|
+    t.string "Код_поставщика"
+    t.string "Название_товара"
+    t.string "Доп_поле_1"
+    t.string "Доп_поле_2"
+    t.string "Доп_поле_3"
+    t.string "Доп_поле_4"
+    t.float "Цена"
+  end
 
   create_table "suppliers", primary_key: "Код_поставщика", force: :cascade do |t|
     t.string "Название_поставщика"
