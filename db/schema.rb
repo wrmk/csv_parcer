@@ -15,8 +15,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_172620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "suppliers", force: :cascade do |t|
-    t.integer "Код_поставщика"
+  create_table "suppliers", primary_key: "Код_поставщика", force: :cascade do |t|
     t.string "Название_поставщика"
   end
 
