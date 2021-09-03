@@ -4,23 +4,41 @@ namespace :import do
   task suppliers: :environment do
     filename = File.join Rails.root, "suppliers.csv"
     CSV.foreach(filename, col_sep: '¦') do |row|
-      id_supplier, name_supplier = row
+      row_hash = {
+        "Код_поставщика"=> row[0],
+        "Название_поставщика"=> row[1]
+      }      
 
-      supplier = Supplier.where("Код_поставщика" => id_supplier)
-      if supplier_update(supplier, name_supplier) 
-      else supplier = Supplier.create(
-                "Код_поставщика" => id_supplier,
-                "Название_поставщика" => name_supplier
-                )
-      end
-      #p supplier
+      supplier = Supplier.where("Код_поставщика" => supplier_hash["Код_поставщика"])
+      if supplier.exists?
+        supplier.update(row_hash)
+      else
+        supplier = Supplier.create(row_hash)
+      end  
     end
   end
-end
 
-def supplier_update(supplier, name_supplier)
-  if supplier.exists?
-    supplier.update("Название_поставщика" => name_supplier)
-  else false
-  end
+  # task sku: :environment do
+  #   filename = File.join Rails.root, "sku.csv"
+  #   CSV.foreach(filename, col_sep: '¦') do |row|
+  #     sku,id_supplier, item_name, field_1, field_2, field_3, field_4, field_5, price = row
+
+  #     sku = SKU.where("SKU" => sku)
+  #     # if supplier_update(supplier, name_supplier) 
+  #     # else 
+  #     sku = SKU.create(
+  #               "SKU" => sku,
+  #               "Код_поставщика" => id_supplier,
+  #               "Название_товара" => item_name,
+  #               "Доп_поле_1" => field_1,
+  #               "Доп_поле_2" => field_2,
+  #               "Доп_поле_3" => field_3,
+  #               "Доп_поле_4" => field_4,
+  #               "Доп_поле_5" => field_5,
+  #               "Цена" => price
+  #               )
+  #     end
+  #     p sku
+  #   # end
+  # end  
 end
