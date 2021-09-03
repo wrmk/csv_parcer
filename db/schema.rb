@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_172643) do
     t.string "Доп_поле_2"
     t.string "Доп_поле_3"
     t.string "Доп_поле_4"
+    t.string "Доп_поле_5"
     t.float "Цена"
   end
 
