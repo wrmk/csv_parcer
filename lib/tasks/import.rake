@@ -4,17 +4,16 @@ namespace :import do
   task suppliers: :environment do
     filename = File.join Rails.root, "suppliers.csv"
     CSV.foreach(filename, col_sep: '¦') do |row|
-      row_hash = {
-        "Код_поставщика"=> row[0],
-        "Название_поставщика"=> row[1]
-      }      
-
-      supplier = Supplier.where("Код_поставщика" => supplier_hash["Код_поставщика"])
+      columns = ['Код_поставщика','Название_поставщика']
+      row_hash = Hash[columns.zip(row)]
+      
+      supplier = Supplier.where([row_hash.first].to_h)
       if supplier.exists?
         supplier.update(row_hash)
       else
         supplier = Supplier.create(row_hash)
-      end  
+      end
+      p supplier
     end
   end
 
