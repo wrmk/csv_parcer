@@ -1,6 +1,7 @@
 class CreateSkus < ActiveRecord::Migration[6.1]
   def change
-    create_table :skus, :primary_key => "SKU" do |t|
+    create_table :skus, id: false do |t|
+      t.string "SKU", :primary_key => true
       t.string "Код_поставщика"
       t.string "Название_товара"
       t.string "Доп_поле_1"

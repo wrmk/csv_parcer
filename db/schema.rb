@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_172643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "skus", primary_key: "SKU", force: :cascade do |t|
+  create_table "skus", primary_key: "SKU", id: :string, force: :cascade do |t|
     t.string "Код_поставщика"
     t.string "Название_товара"
     t.string "Доп_поле_1"
