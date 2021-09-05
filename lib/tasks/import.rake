@@ -1,47 +1,43 @@
 require 'csv'
 
 namespace :import do
+  
   task suppliers: :environment do
-    filename = File.join Rails.root, "suppliers.csv"
-    CSV.foreach(filename, col_sep: '¦') do |row|
-      columns = ['Код_поставщика',
-                 'Название_поставщика'
-                ]
-      row_hash = Hash[columns.zip(row)]
-      
-      supplier = Supplier.where([row_hash.first].to_h)
-      if supplier.exists?
-        supplier.update(row_hash)
-      else
-        supplier = Supplier.create(row_hash)
-      end
-      p supplier
-    end
+    columns = ['Код_поставщика',
+               'Название_поставщика'
+              ]
+    file_name = 'suppliers.csv'
+    db = 'Supplier'.constantize
+    parse_csv(columns,file_name,db)
   end
 
-  task sku: :environment do
-    filename = File.join Rails.root, "sku.csv"
-    CSV.foreach(filename, col_sep: '¦') do |row|
-      columns = ['SKU',
-                 'Код_поставщика',
-                 'Название_товара',
-                 'Доп_поле_1',
-                 'Доп_поле_2',
-                 'Доп_поле_3',
-                 'Доп_поле_4',
-                 'Доп_поле_5',
-                 'Цена'
-                ]
-
-      row_hash = Hash[columns.zip(row)]
-
-      sku = Sku.where([row_hash.first].to_h)
-      if sku.exists?
-        sku.update(row_hash)
-      else
-        sku = Sku.create(row_hash)
-      end
-      p sku      
-    end
+  task skus: :environment do
+    columns = ['SKU',
+               'Код_поставщика',
+               'Название_товара',
+               'Доп_поле_1',
+               'Доп_поле_2',
+               'Доп_поле_3',
+               'Доп_поле_4',
+               'Доп_поле_5',
+               'Цена'
+              ]    
+    file_name = 'sku.csv'
+    db = 'Sku'.constantize
+    parse_csv(columns,file_name,db)
   end  
+end
+
+def parse_csv(columns,file_name,db)
+  filename = File.join Rails.root, file_name
+  CSV.foreach(filename, col_sep: '¦') do |row|
+    row_hash = Hash[columns.zip(row)]
+    item = db.where([row_hash.first].to_h)
+    if item.exists?
+      item.update(row_hash)
+    else
+      item = db.create(row_hash)
+    end
+    # p item     
+  end
 end
