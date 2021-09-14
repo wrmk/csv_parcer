@@ -29,8 +29,8 @@ namespace :import do
 end
 
 def parse_csv(columns,file_name,db)
-  filename = File.join Rails.root, file_name
-  CSV.foreach(filename, col_sep: '¦') do |row|
+  path = File.join Rails.root, file_name
+  CSV.foreach(path, col_sep: '¦') do |row|
     row_hash = Hash[columns.zip(row)]
     item = db.where([row_hash.first].to_h)
     if item.exists?
