@@ -1,4 +1,4 @@
-class CsvParser
+class Parser
   require 'csv'
 
   def self.parse(columns,file_name,db)
@@ -18,4 +18,4 @@ class CsvParser
     end
     p item 
   end
-end
+end 
