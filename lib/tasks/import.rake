@@ -6,7 +6,7 @@ namespace :import do
               ]
     file_name = 'suppliers.csv'
     db = 'Supplier'.constantize
-    CsvParse.parse(columns,file_name,db)
+    CsvParser.parse(columns,file_name,db)
   end
 
   task skus: :environment do
@@ -22,6 +22,6 @@ namespace :import do
               ]    
     file_name = 'sku.csv'
     db = 'Sku'.constantize
-    CsvParse.parse(columns,file_name,db)
+    CsvParser.parse(columns,file_name,db)
   end  
 end

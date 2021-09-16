@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CsvParse, type: :model do
+RSpec.describe CsvParser, type: :model do
   context 'after parse' do
     db = 'Supplier'.constantize
 
@@ -21,7 +21,7 @@ RSpec.describe CsvParse, type: :model do
 end
 
 def check(row_hash,db)
-  CsvParse.save(row_hash,db)
+  CsvParser.save(row_hash,db)
   name = Supplier.find(row_hash['Код_поставщика']).Название_поставщика
   expect(name).to eql(row_hash['Название_поставщика'])
 end
