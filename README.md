@@ -1,24 +1,5 @@
-# README
+# CSV parcer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2 tables: supplier and sku, with association one to many
+parser service with parse and save methods.
+rspec testing save and update table from parsed rows
